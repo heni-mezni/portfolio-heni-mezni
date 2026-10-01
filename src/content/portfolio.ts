@@ -299,6 +299,7 @@ export const profile = {
   role: { en: "Robotics & Embedded Systems Engineer", fr: "Ingénieur en robotique et systèmes embarqués" },
   email: "henimezni01@gmail.com",
   linkedin: "https://www.linkedin.com/in/heni-mezni-/",
+  github: "https://github.com/heni-mezni",
   location: { en: "Sfax, Tunisia", fr: "Sfax, Tunisie" },
   photo: "/images/profile/heni-mezni.webp",
 };

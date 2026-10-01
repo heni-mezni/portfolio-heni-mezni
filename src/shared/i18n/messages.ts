@@ -82,6 +82,7 @@ export const messages = {
       body: "For robotics, embedded systems, perception or autonomous-systems opportunities, feel free to get in touch.",
       email: "Send an email",
       linkedin: "Connect on LinkedIn",
+      github: "View GitHub profile",
       locationLabel: "LOCATION",
     },
     footer: {
@@ -175,6 +176,7 @@ export const messages = {
       body: "Pour échanger autour de la robotique, des systèmes embarqués, de la perception ou de l’autonomie, vous pouvez me contacter.",
       email: "Envoyer un e-mail",
       linkedin: "Me retrouver sur LinkedIn",
+      github: "Voir le profil GitHub",
       locationLabel: "LOCALISATION",
     },
     footer: {
