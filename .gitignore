@@ -1,0 +1,10 @@
+node_modules/
+.next/
+out/
+dist/
+.DS_Store
+*.log
+
+# Keep source CVs out of the public repository and static export.
+/CV_Heni_Mezni.pdf
+/CV_Henni_Mezni(ANG).pdf
