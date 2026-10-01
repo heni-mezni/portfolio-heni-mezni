@@ -3,9 +3,12 @@ import type { Locale, Project } from "@/shared/types";
 import { getMessages } from "@/shared/i18n/messages";
 import { profile } from "@/content/portfolio";
 
+const siteUrl = new URL("https://heni-mezni-robotics-portfolio.goofy-ridge-5535.chatgpt.site");
+
 export function portfolioMetadata(locale: Locale): Metadata {
   const copy = getMessages(locale);
   return {
+    metadataBase: siteUrl,
     title: copy.metadata.title,
     description: copy.metadata.description,
     applicationName: "Heni Mezni Portfolio",
