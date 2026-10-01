@@ -1,10 +1,11 @@
 import type { Locale } from "@/shared/types";
 import { profile } from "@/content/portfolio";
 import { getMessages } from "@/shared/i18n/messages";
+import { withBasePath } from "@/shared/lib/site-paths";
 
 export function SiteFooter({ locale }: { locale: Locale }) {
   const copy = getMessages(locale);
-  const home = locale === "fr" ? "/fr/" : "/";
+  const home = withBasePath("/");
 
   return (
     <footer className="site-footer">

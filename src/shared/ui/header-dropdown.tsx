@@ -44,7 +44,7 @@ export function HeaderDropdown({ className, label, trigger, children }: HeaderDr
         if (event.relatedTarget instanceof Node && !event.currentTarget.contains(event.relatedTarget)) event.currentTarget.open = false;
       }}
       onClick={(event) => {
-        if (event.target instanceof Element && event.target.closest("a")) event.currentTarget.open = false;
+        if (event.target instanceof Element && event.target.closest("a, [data-close-dropdown]")) event.currentTarget.open = false;
       }}
     >
       <summary aria-label={label}>{trigger}</summary>

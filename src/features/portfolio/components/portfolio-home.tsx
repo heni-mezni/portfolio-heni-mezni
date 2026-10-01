@@ -1,4 +1,5 @@
-import type { Locale } from "@/shared/types";
+"use client";
+
 import { AboutSection } from "@/features/portfolio/components/about-section";
 import { HeroSection } from "@/features/portfolio/components/hero-section";
 import { SystemSection } from "@/features/portfolio/components/system-section";
@@ -11,12 +12,14 @@ import { ContactSection } from "@/features/contact/components/contact-section";
 import { SiteHeader } from "@/shared/ui/site-header";
 import { SiteFooter } from "@/shared/ui/site-footer";
 import { BackToTop } from "@/shared/ui/back-to-top";
+import { useLocaleState } from "@/shared/ui/use-locale-state";
 
-export function PortfolioHome({ locale }: { locale: Locale }) {
+export function PortfolioHome() {
+  const { locale, changeLocale } = useLocaleState();
   return (
     <>
       <a className="skip-link" href="#main">{locale === "fr" ? "Aller au contenu" : "Skip to content"}</a>
-      <SiteHeader locale={locale} switchPath="/" />
+      <SiteHeader locale={locale} onLocaleChange={changeLocale} switchPath="/" />
       <main id="main" lang={locale}>
         <HeroSection locale={locale} />
         <SystemSection locale={locale} />

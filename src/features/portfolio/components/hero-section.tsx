@@ -4,10 +4,11 @@ import type { Locale } from "@/shared/types";
 import { profile } from "@/content/portfolio";
 import { getMessages } from "@/shared/i18n/messages";
 import { ArrowRightIcon, ArrowUpRightIcon } from "@/shared/ui/icons";
+import { withBasePath } from "@/shared/lib/site-paths";
 
 export function HeroSection({ locale }: { locale: Locale }) {
   const copy = getMessages(locale);
-  const base = locale === "fr" ? "/fr" : "";
+  const base = "";
 
   return (
     <section className="hero-section section-wrap" id="top" aria-labelledby="hero-title">
@@ -30,7 +31,7 @@ export function HeroSection({ locale }: { locale: Locale }) {
         <div className="hero-grid" aria-hidden="true" />
         <div className="hero-coordinate coordinate-one" aria-hidden="true">{locale === "fr" ? "SFAX / TUNISIE" : "SFAX / TUNISIA"}</div>
         <figure className="portrait-frame">
-          <div className="portrait-image"><Image src={profile.photo} alt={copy.hero.photoAlt} width={900} height={900} priority unoptimized sizes="(max-width: 680px) 90vw, 420px" /></div>
+          <div className="portrait-image"><Image src={withBasePath(profile.photo)} alt={copy.hero.photoAlt} width={900} height={900} priority unoptimized sizes="(max-width: 680px) 90vw, 420px" /></div>
           <figcaption className="portrait-caption"><strong>{profile.name}</strong><span>{locale === "fr" ? "Robotique & systèmes embarqués" : "Robotics & embedded systems"}</span></figcaption>
         </figure>
         <div className="system-card">

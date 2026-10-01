@@ -5,5 +5,5 @@ import { portfolioMetadata } from "@/shared/lib/metadata";
 export const metadata: Metadata = portfolioMetadata("en");
 
 export default function EnglishHomePage() {
-  return <PortfolioHome locale="en" />;
+  return <PortfolioHome />;
 }

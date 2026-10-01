@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import type { Locale, Project } from "@/shared/types";
 import { getMessages } from "@/shared/i18n/messages";
 import { profile } from "@/content/portfolio";
+import { withBasePath } from "@/shared/lib/site-paths";
 
-const siteUrl = new URL("https://heni-mezni-robotics-portfolio.goofy-ridge-5535.chatgpt.site");
+const siteUrl = new URL(`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/`, "https://heni-mezni.github.io");
 
 export function portfolioMetadata(locale: Locale): Metadata {
   const copy = getMessages(locale);
@@ -19,7 +20,7 @@ export function portfolioMetadata(locale: Locale): Metadata {
       title: copy.metadata.title,
       description: copy.metadata.description,
     },
-    icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
+    icons: { icon: withBasePath("/favicon.svg"), shortcut: withBasePath("/favicon.svg") },
   };
 }
 

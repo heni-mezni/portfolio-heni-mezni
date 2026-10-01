@@ -14,5 +14,5 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function EnglishProjectPage({ params }: PageProps) {
-  return <ProjectDetail locale="en" project={await projectFromParams(params)} />;
+  return <ProjectDetail project={await projectFromParams(params)} />;
 }

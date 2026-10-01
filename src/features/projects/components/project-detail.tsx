@@ -1,21 +1,26 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import type { Locale, Project } from "@/shared/types";
+import type { Project } from "@/shared/types";
 import { getMessages } from "@/shared/i18n/messages";
 import { SiteHeader } from "@/shared/ui/site-header";
 import { SiteFooter } from "@/shared/ui/site-footer";
 import { BackToTop } from "@/shared/ui/back-to-top";
 import { ArrowRightIcon } from "@/shared/ui/icons";
+import { withBasePath } from "@/shared/lib/site-paths";
+import { useLocaleState } from "@/shared/ui/use-locale-state";
 
-export function ProjectDetail({ locale, project }: { locale: Locale; project: Project }) {
+export function ProjectDetail({ project }: { project: Project }) {
+  const { locale, changeLocale } = useLocaleState();
   const copy = getMessages(locale);
-  const home = locale === "fr" ? "/fr/" : "/";
+  const home = "/";
   const alternatePath = `/projects/${project.slug}/`;
 
   return (
     <>
       <a className="skip-link" href="#main">{locale === "fr" ? "Aller au contenu" : "Skip to content"}</a>
-      <SiteHeader locale={locale} switchPath={alternatePath} />
+      <SiteHeader locale={locale} onLocaleChange={changeLocale} switchPath={alternatePath} />
       <main id="main" lang={locale} className="project-detail-page section-wrap">
         <span id="top" className="top-anchor" aria-hidden="true" />
         <nav className="breadcrumbs" aria-label={locale === "fr" ? "Fil d’Ariane" : "Breadcrumbs"}>
@@ -27,7 +32,7 @@ export function ProjectDetail({ locale, project }: { locale: Locale; project: Pr
           <p className="detail-summary">{project.summary[locale]}</p>
         </header>
         <figure className="detail-image">
-          <div className="detail-image-frame"><Image src={project.image} alt={project.imageAlt[locale]} fill unoptimized priority sizes="(max-width: 900px) 92vw, 1200px" /></div>
+          <div className="detail-image-frame"><Image src={withBasePath(project.image)} alt={project.imageAlt[locale]} fill unoptimized priority sizes="(max-width: 900px) 92vw, 1200px" /></div>
           <figcaption><span>{copy.projects.illustration}</span><span>{project.organization ?? "Malta"} · {project.title[locale]}</span></figcaption>
         </figure>
         <div className="detail-content-grid">

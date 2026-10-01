@@ -1,8 +1,5 @@
 "use client";
 
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import type { MouseEvent } from "react";
 import type { Locale } from "@/shared/types";
 import { HeaderDropdown } from "@/shared/ui/header-dropdown";
 
@@ -14,41 +11,20 @@ function LanguageFlag({ locale }: { locale: Locale }) {
   );
 }
 
-export function LanguageSelector({ locale, switchPath = "/" }: { locale: Locale; switchPath?: string }) {
-  const router = useRouter();
+export function LanguageSelector({ locale, onLocaleChange }: { locale: Locale; onLocaleChange: (locale: Locale) => void }) {
   const label = locale === "fr" ? "Choisir la langue" : "Choose language";
   const options = [
-    { locale: "en" as const, name: "English", href: switchPath },
-    { locale: "fr" as const, name: "Français", href: `/fr${switchPath}` },
+    { locale: "en" as const, name: "English" },
+    { locale: "fr" as const, name: "Français" },
   ];
-
-  function switchLanguage(event: MouseEvent<HTMLAnchorElement>, href: string) {
-    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-
-    event.preventDefault();
-    const headerBottom = document.querySelector(".site-header")?.getBoundingClientRect().bottom ?? 0;
-    const activationLine = headerBottom + Math.min(140, window.innerHeight * 0.3);
-    const sections = Array.from(document.querySelectorAll<HTMLElement>("main section[id], main > .top-anchor[id]"));
-    const activeSection = sections
-      .filter((section) => {
-        const bounds = section.getBoundingClientRect();
-        return bounds.top <= activationLine && bounds.bottom > headerBottom;
-      })
-      .at(-1) ?? sections.find((section) => section.getBoundingClientRect().bottom > headerBottom);
-    const currentHash = decodeURIComponent(window.location.hash.slice(1));
-    const currentAnchor = currentHash ? document.getElementById(currentHash) : null;
-    const destination = `${href}#${currentAnchor?.id ?? activeSection?.id ?? "top"}`;
-
-    router.push(destination);
-  }
 
   return (
     <HeaderDropdown className="language-selector" label={label} trigger={<><LanguageFlag locale={locale} /><span>{locale.toUpperCase()}</span><svg className="language-chevron" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg></>}>
       <nav className="language-options" aria-label={label}>
         {options.map((option) => (
-          <Link key={option.locale} href={option.href} hrefLang={option.locale} lang={option.locale} aria-current={locale === option.locale ? "page" : undefined} onClick={(event) => switchLanguage(event, option.href)}>
+          <button key={option.locale} type="button" data-close-dropdown aria-current={locale === option.locale ? "true" : undefined} onClick={() => onLocaleChange(option.locale)}>
             <LanguageFlag locale={option.locale} /><span>{option.name}</span>{locale === option.locale ? <span className="language-check" aria-hidden="true">✓</span> : null}
-          </Link>
+          </button>
         ))}
       </nav>
     </HeaderDropdown>
